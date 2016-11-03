@@ -1,4 +1,5 @@
 # coding=utf-8
+
 import time
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
@@ -7,12 +8,11 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import TimeoutException
-from termcolor import colored
 
-success = colored("✔   ","green")
-fail = colored("X   ","red")
+success = "SUCCESS   "
+fail = "FAIL   "
 
-class PySelnium(object):
+class PySelenium(object):
     """
         pyselenium framework for the main class, the original
     selenium provided by the method of the two packaging,
@@ -24,6 +24,7 @@ class PySelnium(object):
         remote consle：
         dr = PySelenium('RChrome','127.0.0.1:8080')
         """
+        t1 = time.time()
         dc = {'platform': 'ANY', 'browserName': 'chrome', 'version': '', 'javascriptEnabled': True}
         dr = None
         if remoteAddress is None:
@@ -54,6 +55,7 @@ class PySelnium(object):
                                       desired_capabilities=dc)
         try:
             self.driver = dr
+            print("{0} Start a new browser: {1}, Spend {2} seconds".format(success,browser,time.time()-t1))
         except Exception:
             raise NameError("Not found {0} browser,You can enter 'ie','ff',"
                             "'chrome','RChrome','RIe' or 'RFirefox'.".format( browser))
@@ -619,4 +621,4 @@ class PySelnium(object):
 
 
 if __name__ == '__main__':
-    driver = PySelnium("chrome")
+    driver = PySelenium("chrome")
